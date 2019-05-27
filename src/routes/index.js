@@ -4,10 +4,13 @@ import {
     NotFound,
     Settings,
     ArticleList,
-    ArticleEdit
+    ArticleEdit,
+    Notifications,
+    NoAuth,
+    Profile
 } from '../views'
 
-export const mainRouter = [{
+export const mainRoutes = [{
     pathname: '/login',
     component: Login
 }, {
@@ -15,17 +18,42 @@ export const mainRouter = [{
     component: NotFound
 }]
 
-export const admainRouter = [{
+export const adminRoutes = [{
     pathname: '/admin/dashboard',
-    component: Dashboard
-}, {
-    pathname: '/admin/settings',
-    component: Settings
-}, {
+    component: Dashboard,
+    title: '仪表盘',
+    icon: 'dashboard',
+    isNav: true,
+    roles: ['001', '002', '003']
+  }, {
     pathname: '/admin/article',
     component: ArticleList,
-    exact: true
-}, {
+    title: '文章管理',
+    icon: 'unordered-list',
+    isNav: true,
+    exact: true,
+    roles: ['001', '002']
+  }, {
     pathname: '/admin/article/edit/:id',
-    component: ArticleEdit
-}]
+    component: ArticleEdit,
+    roles: ['001', '002']
+  }, {
+    pathname: '/admin/notifications',
+    component: Notifications,
+    roles: ['001', '002', '003']
+  }, {
+    pathname: '/admin/noauth',
+    component: NoAuth,
+    roles: ['001', '002', '003']
+  }, {
+    pathname: '/admin/profile',
+    component: Profile,
+    roles: ['001', '002', '003']
+  }, {
+    pathname: '/admin/settings',
+    component: Settings,
+    title: '设置',
+    icon: 'setting',
+    isNav: true,
+    roles: ['001']
+  }]

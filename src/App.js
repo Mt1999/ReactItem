@@ -1,33 +1,46 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { adminRouter } from './routes'
+import { adminRoutes } from './routes'
+import { Frame } from './components'
+import { connect } from 'react-redux'
+
+const menus = adminRoutes.filter(route => route.isNav === true)
+
+const mapState = state => ({
+    isLogin: state.user.isLogin,
+    role: state.user.role
+})
+
+@connect(mapState)
 
 class App extends Component {
-  render() {
-    return (
-        <div>
-        	<div>公共部分</div>
+    render() {
+        return (
+        this.props.isLogin
+        ?
+        <Frame menus={menus}>
             <Switch>
-                {
-                    adminRouter.map(route => {
-                        return (
-                            <Route 
-                                key={route.pathname}
-                                path={route.pathname}
-                                exact={route.exact}
-                                render={(routerProps) => {
-                                    return <route.component{...routerProps} />
-                                }}
-                            />
-                        )
-                    })
-                }
-                <Redirect to={adminRouter[0].pathname} from='/admin' exact />
-                <RedirEct to="/404" />
+            {
+                adminRoutes.map(route => {
+                return (
+                    <Route
+                    key={route.pathname}
+                    path={route.pathname}
+                    exact={route.exact}
+                    render={(routerProps) => {
+                        return <route.component {...routerProps} />
+                    }}
+                    />
+                )
+                })
+            }
+            <Redirect to={adminRoutes[0].pathname} from='/admin' exact />
+            <Redirect to="/404" />
             </Switch>
-        </div>
-    )
-  }
+        </Frame>
+        :
+        <Redirect to="/login" />
+        )
+    }
 }
-
 export default App
