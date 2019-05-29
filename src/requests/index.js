@@ -29,10 +29,10 @@ service.interceptors.response.use((resp) => {
 })
 
 //获取 文章列表
-export const getArticles = (offset = 0, limitied = 10) => {
+export const getArticles = (offset = 0, limited = 10) => {
     return service.post('/api/v1/articleList', {
         offset,
-        limitied
+        limited
     })
 }
 
@@ -44,7 +44,6 @@ export const deleteArticleById = (id) => {
 // 通过id获取文章
 export const getArticleById = (id) => {
     return service.post(`/api/v1/article/${id}`)
-    console.log(id)
 }
 
 // 保存文章
@@ -59,7 +58,7 @@ export const getArticleAmount = () => {
   
 // 获取通知列表
 export const getNotifications = () => {
-    return service.post('/api/v1/notifications')
+    return service.post(`/api/v1/notifications`)
 }
 
 // 登录接口

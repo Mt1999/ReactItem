@@ -78,7 +78,7 @@ class Edit extends Component {
     })
     getArticleById(this.props.match.params.id)
       .then(resp => {
-        const {  id, ...data } = resp
+        const { id, ...data } = resp
         data.createAt = moment(data.createAt)
         this.props.form.setFieldsValue(data)
         this.editor.txt.html(data.content)
