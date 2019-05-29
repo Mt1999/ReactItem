@@ -102,19 +102,6 @@ export default class ArticleList extends Component {
   }
 
   showDeleteArticleModal = (record) => {
-    // 使用函数的方式调用，定制化没那么强
-    // Modal.confirm({
-    //   title: '此操作不可逆，请谨慎！！！',
-    //   content: <Typography>确定要删除<span style={{color: '#f00'}}>{record.title}</span>吗？</Typography>,
-    //   okText: '别磨叽！赶紧删除！',
-    //   cancelText: '我点错了！',
-    //   onOk() {
-    //     deleteArticle(record.id)
-    //       .then(resp => {
-    //         console.log(resp)
-    //       })
-    //   }
-    // })
     this.setState({
       isShowArticleModal: true,
       deleteArticleTitle: record.title,
@@ -129,7 +116,6 @@ export default class ArticleList extends Component {
     deleteArticleById(this.state.deleteArticleID)
       .then(resp => {
         message.success(resp.msg)
-        // 这里沟通的时候有坑，究竟是留在当前页还是到第一页？？？
         // 这里的需求是到一页
         this.setState({
           offset: 0
@@ -210,7 +196,7 @@ export default class ArticleList extends Component {
         this.state.dataSource[i].title,
         this.state.dataSource[i].author,
         this.state.dataSource[i].amount,
-        moment(this.state.dataSource[i].createAt).format('YYYY年MM月DD日 HH:mm:ss')
+        moment(this.state.dataSource[i].createAt).format('YYYY年MM月DD日 hh:mm:ss')
       ])
     }
     /* convert state to workbook */

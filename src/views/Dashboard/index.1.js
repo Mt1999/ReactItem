@@ -22,8 +22,19 @@ export default class Dashboard extends Component {
     getArticleAmount()
       .then(resp => {
         const option = {
+          grid: {  
+            left: '10',  
+            right: '10',  
+            bottom: '10',
+            top: '10',
+            containLabel: true  
+          },        
+          tooltip: {
+            trigger: 'axis'
+          },
           xAxis: {
               type: 'category',
+              boundaryGap: false,
               data: resp.amount.map(item => item.month)
           },
           yAxis: {
@@ -32,9 +43,9 @@ export default class Dashboard extends Component {
           series: [{
               data: resp.amount.map(item => item.value),
               type: 'line',
-              smooth: true
+              areaStyle: {}
           }]
-      }
+        }
         this.articleChart.setOption(option)
       })
   }
@@ -44,10 +55,25 @@ export default class Dashboard extends Component {
   render() {
     return (
       <>
-        <Row gutter={16}>
-          <Col className="gutter-row" span={6}>
-          </Col>
-        </Row>
+        <Card
+          title="概览"
+          bordered={false}
+        >
+          <Row gutter={16}>
+            <Col className="gutter-row" span={6}>
+              <div className="qf-gutter-box" style={{backgroundColor: '#29B6F6'}}>一周</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div className="qf-gutter-box" style={{backgroundColor: '#AB47BC'}}>一个月</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div className="qf-gutter-box" style={{backgroundColor: '#FF7043'}}>半年</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div className="qf-gutter-box" style={{backgroundColor: '#43A047'}}>一年</div>
+            </Col>
+          </Row>
+        </Card>
         <Card
           title="最近浏览量"
           bordered={false}

@@ -31,7 +31,7 @@ class Login extends Component {
       <Redirect to='/admin' />
       :
       <Card
-        title="QF ADMIN登录"
+        title="QF ADMIN注册"
         className="qf-login-wrapper"
       >
         <Form onSubmit={this.handleSubmit} className="login-form">
@@ -64,7 +64,7 @@ class Login extends Component {
               initialValue: true,
             })(<Checkbox disabled={this.props.isLoading}>记住我</Checkbox>)}
             <Button loading={this.props.isLoading} type="primary" htmlType="submit" className="login-form-button">
-              登录
+              注册并登陆
             </Button>
           </Form.Item>
         </Form>
